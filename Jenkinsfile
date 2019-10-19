@@ -28,9 +28,7 @@ pipeline {
 		sh "sed -i 's|latest|s${currentBuild.number}|g' /tmp/rd-s${currentBuild.number}.yaml"
 		sh '/usr/bin/kubectl create -f /tmp/rd-s${currentBuild.number}.yaml'
 		}
-        }
 
-       }
     }
   }
 }
