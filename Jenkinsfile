@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-	sh '/usr/bin/kubectl get pods'
+	sh 'echo ${USER};pwd'
         sh 'echo Building ${BRANCH_NAME}...'
       }
     }
