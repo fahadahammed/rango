@@ -2,7 +2,7 @@ pipeline {
   agent any
   stages {
     stage('build') {
-	if (env.BRANCH_NAME == "master") {  
+	when { expression { BRANCH_NAME == "master"} }  
 		steps {
 		sh 'echo ${USER};pwd;echo ${HOME}'
         	sh 'echo Building ${BRANCH_NAME}...'
@@ -14,7 +14,8 @@ pipeline {
 		sh '/usr/bin/kubectl set image deployment/rango-app rango=172.31.40.211:5000/rango'
 		}
 
-        if (env.BRANCH_NAME == "stage") {  
+	when { expression { BRANCH_NAME == "stage"} }
+
 		steps {
                 sh 'echo ${USER};pwd;echo ${HOME}'
                 sh 'echo Building ${BRANCH_NAME}...'
