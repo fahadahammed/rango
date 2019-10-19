@@ -25,7 +25,7 @@ def api_home():
 
             "timestamp": str(datetime.datetime.now()),
 
-            "application": "Rango"
+            "application": "Rango-v1"
 
         })
 
