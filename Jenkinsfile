@@ -5,6 +5,7 @@ pipeline {
       steps {
 	sh 'echo ${USER};pwd;echo ${HOME}'
         sh 'echo Building ${BRANCH_NAME}...'
+	sh '/usr/bin/kubectl get pods'
       }
     }
   }
