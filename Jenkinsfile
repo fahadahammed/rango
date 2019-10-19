@@ -2,8 +2,8 @@ pipeline {
   agent any
   stages {
     stage('build') {
-      steps {
 	if (env.BRANCH_NAME == "master") {  
+		steps {
 		sh 'echo ${USER};pwd;echo ${HOME}'
         	sh 'echo Building ${BRANCH_NAME}...'
 		sh '/usr/bin/kubectl get pods'
@@ -12,9 +12,10 @@ pipeline {
 		sh '/usr/bin/docker tag rango 172.31.40.211:5000/rango'
 		sh '/usr/bin/docker push 172.31.40.211:5000/rango'
 		sh '/usr/bin/kubectl set image deployment/rango-app rango=172.31.40.211:5000/rango'
-      	}
+		}
 
         if (env.BRANCH_NAME == "stage") {  
+		steps {
                 sh 'echo ${USER};pwd;echo ${HOME}'
                 sh 'echo Building ${BRANCH_NAME}...'
                 sh '/usr/bin/kubectl get pods'
@@ -25,6 +26,7 @@ pipeline {
 		sh 'cp rango-deployment.yaml /tmp/rd-s${currentBuild.number}.yaml'
 		sh "sed -i 's|latest|s${currentBuild.number}|g' /tmp/rd-s${currentBuild.number}.yaml"
 		sh '/usr/bin/kubectl create -f /tmp/rd-s${currentBuild.number}.yaml'
+		}
         }
 
        }
